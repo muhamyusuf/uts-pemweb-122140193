@@ -20,6 +20,8 @@ function PlannerForm({
   onSubmit,
   onReset,
   statusMessage,
+  errors,
+  showErrors,
   categories,
   areas,
   ingredients,
@@ -45,9 +47,15 @@ function PlannerForm({
         categories={categories}
         areas={areas}
         ingredients={ingredients}
+        errors={errors}
+        showErrors={showErrors}
       />
 
-      <NotesField value={form.notes} onChange={onChange} />
+      <NotesField
+        value={form.notes}
+        onChange={onChange}
+        error={showErrors ? errors?.notes : undefined}
+      />
 
       {statusMessage ? (
         <p className="rounded-lg border border-emerald-500/30 bg-emerald-900/30 px-3 py-2 text-sm text-emerald-100">
@@ -74,7 +82,15 @@ function PlannerForm({
   );
 }
 
-function FormGrid({ form, onChange, categories, areas, ingredients }) {
+function FormGrid({
+  form,
+  onChange,
+  categories,
+  areas,
+  ingredients,
+  errors,
+  showErrors,
+}) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <InputField
@@ -82,6 +98,7 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         name="title"
         value={form.title}
         onChange={onChange}
+        error={showErrors ? errors?.title : undefined}
         placeholder="e.g. Italian Night"
         required
         minLength={3}
@@ -92,6 +109,7 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         name="email"
         value={form.email}
         onChange={onChange}
+        error={showErrors ? errors?.email : undefined}
         placeholder="chef@example.com"
         required
         type="email"
@@ -103,11 +121,17 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         onChange={onChange}
         minDate={getToday()}
       />
+      {showErrors && errors?.date ? (
+        <p className="col-span-full mt-1 text-sm text-rose-200">
+          {errors.date}
+        </p>
+      ) : null}
       <InputField
         label="Servings"
         name="servings"
         value={form.servings}
         onChange={onChange}
+        error={showErrors ? errors?.servings : undefined}
         type="number"
         min={1}
         max={20}
@@ -118,6 +142,7 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         name="category"
         value={form.category}
         onChange={onChange}
+        error={showErrors ? errors?.category : undefined}
         options={categories}
         required
       />
@@ -126,6 +151,7 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         name="area"
         value={form.area}
         onChange={onChange}
+        error={showErrors ? errors?.area : undefined}
         options={areas}
         required
       />
@@ -134,6 +160,7 @@ function FormGrid({ form, onChange, categories, areas, ingredients }) {
         name="ingredient"
         value={form.ingredient}
         onChange={onChange}
+        error={showErrors ? errors?.ingredient : undefined}
         options={ingredients}
       />
       <DessertField checked={form.includeDessert} onChange={onChange} />
@@ -174,16 +201,25 @@ function FormControls({ hasPlans, onClearPlans, onReset }) {
   );
 }
 
-function InputField({ label, ...props }) {
+function InputField({ label, error, ...props }) {
   return (
     <label className="flex flex-col gap-2 text-sm text-zinc-200">
       {label}
       <Input {...props} />
+      {error ? <p className="mt-1 text-sm text-rose-200">{error}</p> : null}
     </label>
   );
 }
 
-function SelectField({ label, options, value, onChange, name, required }) {
+function SelectField({
+  label,
+  options,
+  value,
+  onChange,
+  name,
+  required,
+  error,
+}) {
   return (
     <div className="flex flex-col gap-2 text-sm text-zinc-200">
       <span>{label}</span>
@@ -211,6 +247,7 @@ function SelectField({ label, options, value, onChange, name, required }) {
           ))}
         </SelectContent>
       </Select>
+      {error ? <p className="mt-1 text-sm text-rose-200">{error}</p> : null}
     </div>
   );
 }
@@ -240,7 +277,7 @@ function DessertField({ checked, onChange }) {
   );
 }
 
-function NotesField({ value, onChange }) {
+function NotesField({ value, onChange, error }) {
   return (
     <label className="flex flex-col gap-2 text-sm text-zinc-200">
       Notes
@@ -251,6 +288,7 @@ function NotesField({ value, onChange }) {
         rows={4}
         placeholder="Any prep instructions or reminders..."
       />
+      {error ? <p className="mt-1 text-sm text-rose-200">{error}</p> : null}
     </label>
   );
 }
@@ -277,12 +315,16 @@ PlannerForm.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   metadataLoading: PropTypes.bool.isRequired,
   metadataError: PropTypes.string,
+  errors: PropTypes.objectOf(PropTypes.string),
+  showErrors: PropTypes.bool,
   hasPlans: PropTypes.bool.isRequired,
   onClearPlans: PropTypes.func.isRequired,
 };
 
 PlannerForm.defaultProps = {
   metadataError: "",
+  errors: {},
+  showErrors: false,
 };
 
 FormGrid.propTypes = {
@@ -291,6 +333,8 @@ FormGrid.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   areas: PropTypes.arrayOf(PropTypes.string).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  errors: PropTypes.objectOf(PropTypes.string),
+  showErrors: PropTypes.bool,
 };
 
 FormControls.propTypes = {
@@ -301,6 +345,7 @@ FormControls.propTypes = {
 
 InputField.propTypes = {
   label: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
 
 SelectField.propTypes = {
@@ -310,6 +355,7 @@ SelectField.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -324,6 +370,7 @@ DessertField.propTypes = {
 NotesField.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 
 export default PlannerForm;

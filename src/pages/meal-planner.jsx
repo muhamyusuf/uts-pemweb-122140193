@@ -31,6 +31,8 @@ const createDefaultFormState = () => ({
 function MealPlanner() {
   const [form, setForm] = useState(createDefaultFormState);
   const [statusMessage, setStatusMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const [showErrors, setShowErrors] = useState(false);
 
   const {
     categories,
@@ -94,6 +96,9 @@ function MealPlanner() {
   const handleChange = useCallback((event) => {
     const { name, value, type, checked } = event.target;
     setStatusMessage("");
+    // Reset showErrors saat user mulai edit field
+    setShowErrors(false);
+    setErrors({});
     setForm((current) => ({
       ...current,
       [name]: type === "checkbox" ? checked : value,
@@ -103,6 +108,44 @@ function MealPlanner() {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
+
+      // Validasi custom
+      const newErrors = {};
+
+      if (!form.title.trim() || form.title.trim().length < 3) {
+        newErrors.title = "Title must be at least 3 characters long";
+      }
+
+      if (!form.email.trim()) {
+        newErrors.email = "Email is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+
+      if (!form.date) {
+        newErrors.date = "Cooking date is required";
+      }
+
+      if (!form.servings || form.servings < 1 || form.servings > 20) {
+        newErrors.servings = "Servings must be between 1 and 20";
+      }
+
+      if (!form.category) {
+        newErrors.category = "Please select a category";
+      }
+
+      if (!form.area) {
+        newErrors.area = "Please select a cuisine area";
+      }
+
+      // Jika ada error, tampilkan dan jangan submit
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        setShowErrors(true);
+        setStatusMessage("");
+        return;
+      }
+
       const formElement = event.currentTarget;
       if (!formElement.checkValidity()) {
         formElement.reportValidity();
@@ -122,6 +165,8 @@ function MealPlanner() {
       });
 
       setStatusMessage("Meal plan saved successfully.");
+      setShowErrors(false);
+      setErrors({});
       setForm((current) => ({
         ...current,
         title: "",
@@ -133,6 +178,8 @@ function MealPlanner() {
 
   const handleReset = useCallback(() => {
     setStatusMessage("");
+    setErrors({});
+    setShowErrors(false);
     setForm((current) => ({
       ...createDefaultFormState(),
       category: resolveValue(current.category, categories),
@@ -195,6 +242,8 @@ function MealPlanner() {
             onSubmit={handleSubmit}
             onReset={handleReset}
             statusMessage={statusMessage}
+            errors={errors}
+            showErrors={showErrors}
             categories={categories}
             areas={areas}
             ingredients={ingredients}
