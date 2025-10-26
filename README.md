@@ -2,7 +2,7 @@
 
 **Nama:** Muhammad Yusuf  
 **NIM:** 122140193  
-**Deployment:** [Lihat disini]()
+**Deployment:** [Lihat disini](https://uts-pemweb-122140193.vercel.app/)
 
 ---
 
