@@ -224,4 +224,3 @@ DockIcon.propTypes = {
 };
 
 export { Dock, DockIcon, DockItem, DockLabel };
-

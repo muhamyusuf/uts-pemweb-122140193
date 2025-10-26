@@ -39,4 +39,3 @@ PlannerQueuePreview.propTypes = {
 };
 
 export default PlannerQueuePreview;
-

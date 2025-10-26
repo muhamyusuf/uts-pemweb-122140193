@@ -260,7 +260,9 @@ const RecipeCard = ({ meal }) => {
           <button
             type="button"
             onClick={handleToggleFavorite}
-            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+            aria-label={
+              isFavorite ? "Remove from favorites" : "Add to favorites"
+            }
             className="relative group rounded-full bg-white/10 p-2 transition hover:bg-white/20"
           >
             {isFavorite ? (

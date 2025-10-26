@@ -71,4 +71,3 @@ PlannerQueuePanel.propTypes = {
 };
 
 export default PlannerQueuePanel;
-

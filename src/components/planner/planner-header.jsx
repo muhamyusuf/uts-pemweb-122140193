@@ -1,4 +1,4 @@
-import { CheckCircle2, UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed } from "lucide-react";
 
 function PlannerHeader() {
   return (

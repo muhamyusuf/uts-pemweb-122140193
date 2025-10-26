@@ -4,7 +4,6 @@ import { Search, X } from "lucide-react";
 
 import { useMealSearch } from "@/hooks/use-meal-search";
 import { cn } from "@/lib/utils";
-// import { Input } from "./input";
 
 export function RecipeSearchBar({
   onResult,

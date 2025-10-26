@@ -157,7 +157,7 @@ function MorphingDialogContent({ children, className, style }) {
     }
 
     const nodes = element.querySelectorAll(
-      'a[href], button:not([disabled]), textarea, input, select'
+      "a[href], button:not([disabled]), textarea, input, select"
     );
     setFirstFocusableElement(nodes[0] ?? null);
     setLastFocusableElement(nodes[nodes.length - 1] ?? null);
@@ -192,10 +192,7 @@ function MorphingDialogContent({ children, className, style }) {
         >
           <motion.div
             ref={containerRef}
-            className={cn(
-              "relative w-full max-w-3xl outline-none",
-              className
-            )}
+            className={cn("relative w-full max-w-3xl outline-none", className)}
             layoutId={`dialog-${uniqueId}`}
             role="dialog"
             aria-modal="true"

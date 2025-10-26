@@ -163,4 +163,3 @@ TableMessage.propTypes = {
 };
 
 export default PlannerSuggestionsTable;
-
