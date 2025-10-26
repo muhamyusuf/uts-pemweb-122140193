@@ -78,8 +78,7 @@ const useMealCatalogStore = create(
             resolvedCategory = nextCategory;
 
             const shouldFetchMeals =
-              Boolean(nextCategory) &&
-              !current.mealsByCategory[nextCategory];
+              Boolean(nextCategory) && !current.mealsByCategory[nextCategory];
 
             return {
               categories,
@@ -153,8 +152,7 @@ const useMealCatalogStore = create(
         } catch (error) {
           set({
             loading: false,
-            error:
-              error instanceof Error ? error.message : "Unknown error.",
+            error: error instanceof Error ? error.message : "Unknown error.",
           });
         }
       },

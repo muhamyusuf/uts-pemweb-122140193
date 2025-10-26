@@ -81,7 +81,7 @@ export const useMealPlanStore = create(
 export const useMealPlans = () =>
   useMealPlanStore((state) => state.plans ?? []);
 
-// ✅ FIX: Ambil suggestions object, lalu convert ke array dengan useMemo
+// Ambil suggestions object, lalu convert ke array dengan useMemo
 export const useMealPlanSuggestions = () => {
   const suggestions = useMealPlanStore((state) => state.suggestions ?? {});
 

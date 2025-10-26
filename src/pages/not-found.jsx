@@ -17,8 +17,8 @@ export default function NotFound() {
             Recipe not on the menu
           </h1>
           <p className="max-w-lg text-base text-zinc-200">
-            The page you’re looking for isn’t plated yet. Head back to the recipe
-            collection or the meal planner to continue cooking.
+            The page you’re looking for isn’t plated yet. Head back to the
+            recipe collection or the meal planner to continue cooking.
           </p>
         </div>
 
@@ -41,4 +41,3 @@ export default function NotFound() {
     </div>
   );
 }
-

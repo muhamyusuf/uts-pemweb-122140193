@@ -103,14 +103,3 @@ npm run preview
 ```
 
 ---
-
-## Saran Pengujian Manual
-
-- Ganti kategori/area di beranda untuk memastikan pagination dan skeleton berjalan benar
-- Uji pencarian di beranda serta halaman favorit (hasil ditemukan vs tidak ditemukan)
-- Simpan dan hapus favorit, lalu refresh untuk memastikan data persisten
-- Isi form planner: coba kasus valid, kosong, angka negatif, email salah
-- Gunakan tabel saran untuk menambahkan queue dan auto-plan, pastikan daftar rencana ikut berubah
-- Akses rute yang tidak ada untuk memeriksa halaman 404
-
----
