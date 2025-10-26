@@ -44,7 +44,7 @@ Aplikasi React ini menerapkan studi kasus resep berbasis API TheMealDB. Seluruh 
 
 - Form planner memiliki >5 input berbeda, validasi required/min/max/type, serta feedback submit
 - Tabel saran menampilkan kolom Meal, Category, Area, Tags, Actions dengan data TheMealDB
-- Styling memanfaatkan kombinasi Tailwind utility, custom CSS (`src/pages/home.css`, `src/components/ui/card-grainny.css`), pseudo-element, dan layout responsif
+- Styling memanfaatkan kombinasi Tailwind utility, custom CSS (`src/pages/home.css`, `src/components/ui/customcss/card-grainny.css`), pseudo-element, dan layout responsif
 
 ### **CPMK0502: HTML, JavaScript, React**
 

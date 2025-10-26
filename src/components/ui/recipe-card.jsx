@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ExternalLink, Heart, HeartOff, ListPlus, Search } from "lucide-react";
 
-import "./card-grainny.css";
+import "./customcss/card-grainny.css";
 
 import { MorphingDialogBasicImage } from "@/components/ui/morphing-dialog-basic-image";
 import { useMealDetail } from "@/hooks/use-meal-detail";
