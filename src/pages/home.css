@@ -1,0 +1,20 @@
+#root main {
+  display: block;
+}
+
+.hero-highlight {
+  background: linear-gradient(120deg, rgba(255, 194, 120, 0.28), transparent);
+  border-radius: 24px;
+}
+
+.hero-highlight:hover {
+  box-shadow: 0 24px 80px rgba(255, 159, 67, 0.25);
+}
+
+@media (max-width: 640px) {
+  #root {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
